@@ -9,7 +9,7 @@ const computationSchema = new Schema({
   // SentOn
   SentOn:{
     type: Date,
-    required: false
+    required: true
   },
   transactionHash: {
     type: String,
