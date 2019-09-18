@@ -1,15 +1,16 @@
 import resource from 'resource-router-middleware'
-import { getAllComputations } from './controller'
+import Computation from '../../models/computation'
+import { getAllWorkers } from './controller'
 
-const computationRoutes = () =>
+const workerRoutes = () =>
   resource({
-    id: 'computation',
+    id: 'worker',
     load(req, id, callback) {
       console.log('load api')
     },
     /** GET / - List all entities */
     index({ params }, res) {
-      getAllComputations()
+      getAllWorkers()
         .then(result => {
           res.json(result)
         })
@@ -19,4 +20,4 @@ const computationRoutes = () =>
     }
   })
 
-export default computationRoutes
+export default workerRoutes

@@ -28,12 +28,12 @@ app.use(
 )
 
 // connect to db
-initializeDb(db => {
+initializeDb(() => {
   // internal middleware
-  app.use(middleware({ config, db }))
+  app.use(middleware())
 
   // api router
-  app.use('/api', api({ config, db }))
+  app.use('/api', api())
 
   app.server.listen(process.env.PORT || config.port, () => {
     console.log(`Started on port ${app.server.address().port}`)
