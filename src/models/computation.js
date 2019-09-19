@@ -2,32 +2,64 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const computationSchema = new Schema({
-  taskId: {
+  _id: {
     type: String,
     required: true
   },
-  srcAdd: {
+  sentOn:{
+    type: Date,
+    required: true
+  },
+  transactionHash: {
     type: String,
     required: true
   },
-  workerAdd: {
+  scAdd: {
     type: String,
     required: true
   },
-  success: {
-    type: Boolean,
+  msgId: {
+    type: String,
     required: true
   },
-  sentOn: {
+  nonce: {
     type: String,
+    required: true
+  },
+  sender: {
+    type: String,
+    required: true
+  },
+  workerAddress: {
+    type: String,
+    required: true
+  },
+  taskRecordGasUsed: {
+    type: String,
+    required: true
+  },
+  taskRecordBlockNumber: {
+    type: Number,
     required: true
   },
   completedOn: {
-    type: String,
+    type: Date,
+    required: false
+  },
+  factorsFound: {
+    type: Number,
     required: true
-  }
+  },
+  errorReportedOn:{
+    type: Date,
+    required: false
+  },
+  err: {
+    type: String,
+    required: false
+  },
 })
 
-const Computation = mongoose.model('Computation', computationSchema)
+const Computation = mongoose.model('tasks', computationSchema)
 
 export default Computation
