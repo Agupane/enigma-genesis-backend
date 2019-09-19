@@ -16,28 +16,34 @@ const getWorkerDataFromWorkerAddress = async workerAddress => {
   const computationsOfTheWorker = await Computation.find({ workerAddress })
   const totalComputations = computationsOfTheWorker.length
   let failedComputations = 0
-  let successfullyComputations = 0
-  let totalCompletionTime = 0
+  let sucessfulComputations = 0
+  let totalCompletionTimeForSuccessTasks = 0
   for (let computationIterator of computationsOfTheWorker) {
     const { completedOn, sentOn } = computationIterator
+    // Successfully task
     if (completedOn) {
-      successfullyComputations++
       const sentMoment = moment(sentOn)
       const completedMoment = moment(completedOn)
       const completionTime = completedMoment.diff(sentMoment)
-      totalCompletionTime += completionTime
+      totalCompletionTimeForSuccessTasks += completionTime
+      // Adds successfullyComputation
+      sucessfulComputations++
+    } else {
+      // Task not completed
+      failedComputations++
     }
-    computationIterator.completedOn ? successfullyComputations++ : failedComputations++
   }
-  console.log('total completion time ', totalCompletionTime)
-  console.log('total computations ', totalComputations)
-  const avgResponseTime = totalCompletionTime / totalComputations
+  const avgResponseTime = totalCompletionTimeForSuccessTasks / sucessfulComputations
   const ethAddress = computationsOfTheWorker[0].sender
+  const percentSuccessfulComputations = sucessfulComputations * 100 / totalComputations
   return {
     ethAddress,
-    avgResponseTime, // totalCompletionTime / totalComputations
+    avgResponseTime, // totalCompletionTime for successfully tasks / successfullyComputations
     failedComputations,
-    successfullyComputations
+    sucessfulComputations,
+    percentSuccessfulComputations,
+    totalComputations,
+    workerAddress
   }
 }
 
@@ -51,7 +57,7 @@ export const getAllWorkers = async () => {
       const newWorkerData = await getWorkerDataFromWorkerAddress(workerIterator)
       workersData.push(newWorkerData)
     }
-    console.log('Final workers data: ', workersData)
+    //  console.log('Final workers data: ', workersData)
     return workersData
   } catch (error) {
     console.log('Error on getAllWorkers:', error)

@@ -44,7 +44,7 @@ const computationSchema = new Schema({
   },
   completedOn: {
     type: Date,
-    required: true
+    required: false
   },
   factorsFound: {
     type: Number,
@@ -52,11 +52,11 @@ const computationSchema = new Schema({
   },
   errorReportedOn:{
     type: Date,
-    required: true
+    required: false
   },
   err: {
     type: String,
-    required: true
+    required: false
   },
 })
 
