@@ -15,7 +15,8 @@ export const getAllComputations = async (req, res, next) => {
       const status = getTaskStatus(computationIterator)
 
       const newComputation = {
-        ...computationIterator.toObject()
+        ...computationIterator.toObject(),
+        status
       }
       results.push(newComputation)
     }

@@ -14,6 +14,88 @@ PORT=8080 yarn run dev
 PORT=8080 yarn start
 ```
 
+APIS
+-----
+#### Computations API example: 
+- `http://localhost:8080/api/computations`
+```
+[
+    {
+        "_id": "0xfc8a4d0eef0a61b9ba28325bb5caeb20be76883ce82a52b98c8a88c243258cc3",
+        "sentOn": "2019-09-19T13:43:32.945Z",
+        "transactionHash": "0xb82b4836948c97a57f0611ee02ca92129727ce1b567968e28e9ad2284d654cda",
+        "scAddr": "0x88987af7d35eabcad95915b93bfd3d2bc3308f06b7197478b0dfca268f0497dc",
+        "msgId": "SoNQg6AXJ9Nr",
+        "nonce": "6",
+        "sender": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+        "workerAddress": "3a85a92726fc861968ecc1e7eae78ef072872d39",
+        "taskRecordGasUsed": "179309",
+        "taskRecordBlockNumber": 70,
+        "completedOn": "2019-09-19T13:43:34.051Z",
+        "factorsFound": 12,
+        "status": "Completed"
+    },
+    {
+        "_id": "0x446e739babcd90ddd7f466a78961ca31fa411e14de57f81b359f3cd5d61ecf43",
+        "sentOn": "2019-09-19T13:43:34.305Z",
+        "transactionHash": "0x67115819574d6854269de55864aaaef6dea476d287f87e2749cfb5cdb53a6bdb",
+        "scAddr": "0x88987af7d35eabcad95915b93bfd3d2bc3308f06b7197478b0dfca268f0497dc",
+        "msgId": "kgEcI6AiFOaW",
+        "nonce": "7",
+        "sender": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+        "workerAddress": "3a85a92726fc861968ecc1e7eae78ef072872d39",
+        "taskRecordGasUsed": "179309",
+        "taskRecordBlockNumber": 73,
+        "completedOn": "2019-09-19T13:43:35.358Z",
+        "factorsFound": 12,
+        "status": "Completed"
+    },
+]
+```
+#### Workers API example: 
+- `http://localhost:8080/api/workers`
+```
+[
+    {
+        "ethAddress": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+        "avgResponseTime": 1209.762443438914,
+        "failedComputations": 0,
+        "sucessfulComputations": 442,
+        "percentSuccessfulComputations": 100,
+        "totalComputations": 442,
+        "workerAddress": "3a85a92726fc861968ecc1e7eae78ef072872d39"
+    },
+    {
+        "ethAddress": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+        "avgResponseTime": null,
+        "failedComputations": 1,
+        "sucessfulComputations": 0,
+        "percentSuccessfulComputations": 0,
+        "totalComputations": 1,
+        "workerAddress": "8016323055b36302d50a8bc6f71f32865ebe4272"
+    }
+]
+```
+
+#### Task details API example: 
+- `http://localhost:8080/api/taskDetails/0xfc8a4d0eef0a61b9ba28325bb5caeb20be76883ce82a52b98c8a88c243258cc3`
+```
+{
+    "_id": "0xfc8a4d0eef0a61b9ba28325bb5caeb20be76883ce82a52b98c8a88c243258cc3",
+    "sentOn": "2019-09-19T13:43:32.945Z",
+    "transactionHash": "0xb82b4836948c97a57f0611ee02ca92129727ce1b567968e28e9ad2284d654cda",
+    "scAddr": "0x88987af7d35eabcad95915b93bfd3d2bc3308f06b7197478b0dfca268f0497dc",
+    "msgId": "SoNQg6AXJ9Nr",
+    "nonce": "6",
+    "sender": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+    "workerAddress": "3a85a92726fc861968ecc1e7eae78ef072872d39",
+    "taskRecordGasUsed": "179309",
+    "taskRecordBlockNumber": 70,
+    "completedOn": "2019-09-19T13:43:34.051Z",
+    "factorsFound": 12
+}
+```
+
 License
 -------
 
