@@ -61,19 +61,19 @@ const getWorkerDataFromWorkerAddress = async workerAddress => {
   }
 }
 
-export const getAllWorkers = async () => {
+export const getAllWorkers = async (req, res, next) => {
   console.log('Getting all workers...')
+  const workersData = []
   try {
     const workerAddresses = await getAllWorkersAddressesByComputations()
     // Iterates over all the workers addresses and calculates: success, fail, completedNumbers, errorNumber, % fail, % success, avgResTime ( sumatory of completedOn-sentOn )
-    const workersData = []
     for (let workerIterator of workerAddresses) {
       const newWorkerData = await getWorkerDataFromWorkerAddress(workerIterator)
       workersData.push(newWorkerData)
     }
-    //  console.log('Final workers data: ', workersData)
-    return workersData
   } catch (error) {
     console.log('Error on getAllWorkers:', error)
+    next(error)
   }
+  res.json(workersData)
 }

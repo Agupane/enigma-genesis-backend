@@ -1,23 +1,8 @@
-import resource from 'resource-router-middleware'
-import Computation from '../../models/computation'
 import { getAllWorkers } from './controller'
+import express from 'express'
 
-const workerRoutes = () =>
-  resource({
-    id: 'worker',
-    load(req, id, callback) {
-      console.log('load api')
-    },
-    /** GET / - List all entities */
-    index({ params }, res) {
-      getAllWorkers()
-        .then(result => {
-          res.json(result)
-        })
-        .catch(error => {
-          res.json(error)
-        })
-    }
-  })
+const workerRoutes = express.Router()
+
+workerRoutes.get('/', getAllWorkers)
 
 export default workerRoutes
