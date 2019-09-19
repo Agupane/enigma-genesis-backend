@@ -1,5 +1,6 @@
 import Computation from '../../models/computation'
 import moment from 'moment'
+import { getTaskStatus } from '../../utils/utils'
 
 const getAllWorkersAddressesByComputations = async () => {
   console.log('Getting all workers addresses...')
@@ -16,31 +17,44 @@ const getWorkerDataFromWorkerAddress = async workerAddress => {
   const computationsOfTheWorker = await Computation.find({ workerAddress })
   const totalComputations = computationsOfTheWorker.length
   let failedComputations = 0
-  let sucessfulComputations = 0
+  let successfulComputations = 0
+  let pendingComputations = 0
   let totalCompletionTimeForSuccessTasks = 0
   for (let computationIterator of computationsOfTheWorker) {
     const { completedOn, sentOn } = computationIterator
+    const taskStatus = getTaskStatus(computationIterator)
     // Successfully task
-    if (completedOn) {
-      const sentMoment = moment(sentOn)
-      const completedMoment = moment(completedOn)
-      const completionTime = completedMoment.diff(sentMoment)
-      totalCompletionTimeForSuccessTasks += completionTime
-      // Adds successfullyComputation
-      sucessfulComputations++
-    } else {
-      // Task not completed
-      failedComputations++
+    switch(taskStatus) {
+      case 'Completed': {
+        const sentMoment = moment(sentOn)
+        const completedMoment = moment(completedOn)
+        const completionTime = completedMoment.diff(sentMoment)
+        totalCompletionTimeForSuccessTasks += completionTime
+        // Adds successfullyComputation
+        successfulComputations++
+        break
+      }
+      case 'Pending': {
+        // Task not completed (pending task)
+        pendingComputations++
+        break
+      }
+      case 'Error': {
+        // Task completed with error
+        failedComputations++
+        break
+      }
     }
   }
-  const avgResponseTime = totalCompletionTimeForSuccessTasks / sucessfulComputations
+  const avgResponseTime = totalCompletionTimeForSuccessTasks / successfulComputations
   const ethAddress = computationsOfTheWorker[0].sender
-  const percentSuccessfulComputations = sucessfulComputations * 100 / totalComputations
+  const percentSuccessfulComputations = (successfulComputations * 100) / totalComputations
   return {
     ethAddress,
-    avgResponseTime, // totalCompletionTime for successfully tasks / successfullyComputations
+    avgResponseTime,
     failedComputations,
-    sucessfulComputations,
+    successfulComputations,
+    pendingComputations,
     percentSuccessfulComputations,
     totalComputations,
     workerAddress
