@@ -6,8 +6,7 @@ const computationSchema = new Schema({
     type: String,
     required: true
   },
-  // SentOn
-  SentOn:{
+  sentOn:{
     type: Date,
     required: true
   },
@@ -43,22 +42,21 @@ const computationSchema = new Schema({
     type: Number,
     required: true
   },
-  // Completed on
   completedOn: {
     type: Date,
-    required: false
+    required: true
   },
   factorsFound: {
     type: Number,
-    required: false
+    required: true
   },
   errorReportedOn:{
     type: Date,
-    required: false
+    required: true
   },
   err: {
     type: String,
-    required: false
+    required: true
   },
 })
 

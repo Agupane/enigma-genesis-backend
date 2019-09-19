@@ -22,14 +22,10 @@ const getWorkerDataFromWorkerAddress = async workerAddress => {
     const { completedOn, sentOn } = computationIterator
     if (completedOn) {
       successfullyComputations++
-      if (sentOn) {
-        const sentMoment = moment(sentOn)
-        const completedMoment = moment(completedOn)
-        const completionTime = completedMoment.diff(sentMoment)
-        totalCompletionTime += completionTime
-      } else {
-        console.warn(`SentOn not defined for worker: ${workerAddress}`)
-      }
+      const sentMoment = moment(sentOn)
+      const completedMoment = moment(completedOn)
+      const completionTime = completedMoment.diff(sentMoment)
+      totalCompletionTime += completionTime
     }
     computationIterator.completedOn ? successfullyComputations++ : failedComputations++
   }
