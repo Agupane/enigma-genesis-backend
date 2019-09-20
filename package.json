@@ -8,7 +8,8 @@
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "yarn run -s build",
-    "test": "eslint src"
+    "test": "eslint src",
+    "docker": "docker run "
   },
   "eslintConfig": {
     "extends": "eslint:recommended",

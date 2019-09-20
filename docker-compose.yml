@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+##############
+# Backend
+##############
+  genesisbackend:
+    build: ./backend
+    command: yarn start
