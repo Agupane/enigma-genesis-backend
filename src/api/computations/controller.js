@@ -8,10 +8,6 @@ export const getAllComputations = async (req, res, next) => {
   try {
     const computations = await Computation.find({})
     for (let computationIterator of computations) {
-      const { sentOn, completedOn, errorReportedOn } = computationIterator
-      const sentMoment = moment(sentOn)
-      const completedMoment = moment(completedOn)
-      const completionTime = completedMoment.diff(sentMoment)
       const status = getTaskStatus(computationIterator)
 
       const newComputation = {

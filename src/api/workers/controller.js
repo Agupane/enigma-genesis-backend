@@ -28,7 +28,7 @@ const getWorkerDataFromWorkerAddress = async workerAddress => {
       case 'Completed': {
         const sentMoment = moment(sentOn)
         const completedMoment = moment(completedOn)
-        const completionTime = completedMoment.diff(sentMoment)
+        const completionTime = completedMoment.diff(sentMoment, 'ms')
         totalCompletionTimeForSuccessTasks += completionTime
         // Adds successfullyComputation
         successfulComputations++
