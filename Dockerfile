@@ -1,26 +1,20 @@
-FROM alpine:3.4
+FROM node:10.16.0
 
-# File Author / Maintainer
-LABEL authors="Zouhir Chahoud <zouhir@zouhir.org>"
+# Work directory
+WORKDIR /app
 
-# Update & install required packages
-RUN apk add --update nodejs bash git
+# Install dependencies
+COPY package.json /app
+RUN yarn install
+COPY . /app
 
-# Install app dependencies
-COPY package.json /www/package.json
-RUN cd /www; npm install
-
-# Copy app source
-COPY . /www
-
-# Set work directory to /www
-WORKDIR /www
-
-# set your port
-ENV PORT 8080
+# Build app
+RUN yarn run build
 
 # expose the port to outside world
 EXPOSE  8080
 
-# start command as per package.json
-CMD ["npm", "start"]
+# Run app
+CMD [ "node", "dist/index.js" ]
+#RUN yarn start
+

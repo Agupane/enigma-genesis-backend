@@ -9,11 +9,12 @@ export default callback => {
       console.log('DB connection success!')
     })
     .catch(error => {
-      console.error('unable to connect to database', error)
+    //  console.error('unable to connect to database', error)
     })
 
   mongoose.connection.on('error', () => {
-    throw new Error(`unable to connect to database: ${mongoUri}`)
+    console.error(`unable to connect to database: ${mongoUri}`)
+   // throw new Error(`unable to connect to database: ${mongoUri}`)
   })
 
   callback()
