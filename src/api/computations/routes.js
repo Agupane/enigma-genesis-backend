@@ -5,6 +5,5 @@ const computationRoutes = express.Router()
 
 computationRoutes.get('/', getAllComputations)
 computationRoutes.get('/:pages/', getComputationsByPage)
-computationRoutes.get('/workers/pages/', getComputationsByWorkerAddress)
 
 export default computationRoutes
