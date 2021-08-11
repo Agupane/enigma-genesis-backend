@@ -2693,8 +2693,8 @@ path-key@^2.0.0, path-key@^2.0.1:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
 
 path-to-regexp@0.1.7:
   version "0.1.7"
@@ -2923,10 +2923,6 @@ resolve@^1.12.0:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.12.0.tgz#3fc644a35c84a48554609ff26ec52b66fa577df6"
   dependencies:
     path-parse "^1.0.6"
-
-resource-router-middleware@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/resource-router-middleware/-/resource-router-middleware-0.6.0.tgz#bccb286c22ae990840f963769c325f68c875c1f3"
 
 restore-cursor@^2.0.0:
   version "2.0.0"
